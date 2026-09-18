@@ -12,6 +12,19 @@ metadata:
 The repository ships without a stack on purpose. Your job: turn the user's idea into a chosen
 stack, recorded in the docs, scaffolded and verified. Do not write product code before step 5.
 
+## Step 0 — Rename the template (once)
+
+If the repo still says `template-open-source-tool` / "Open Source Tool" anywhere (README,
+AGENTS.md, docs, skills), fix that before anything else. The slug is the repository name; the
+title is the human name for the tool.
+
+```bash
+node scripts/init.mjs --name <repo-slug> --title "<Tool Name>"
+```
+
+If the user hasn't named the tool yet, ask — do not invent one. After the rename, re-read
+`README.md` and `AGENTS.md` (they now say the real name), delete `scripts/init.mjs`, and continue.
+
 ## Step 1 — Get the brief (ask, do not assume)
 
 Ask only the questions whose answers change the design:
