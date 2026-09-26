@@ -1,6 +1,6 @@
 ---
 name: ship-release
-description: Release and publish this project. Use when the user asks to release, ship, publish, or deploy. Publishing is manual by policy; this skill is filled in with the project's real commands at bootstrap time.
+description: Prepare and verify this project's release. Use when the user asks to release, ship, publish, or deploy. The main-branch workflow publishes or deploys automatically; this skill is filled in with the project's real procedure at bootstrap time.
 license: MIT
 metadata:
   template: template-open-source-tool
@@ -11,32 +11,36 @@ metadata:
 
 ## Rules (always)
 
-- **Version source of truth:** the manifest of the chosen stack. A release tag is `v<version>`
-  and must match it exactly.
-- **Publishing is manual.** Give the user exact, copy-pasteable commands; never wire an
-  automated publish, and never publish without being asked.
-- **CI builds artifacts on tags; publishing is a deliberate human step** with scoped credentials.
+- **Version source of truth:** the manifest of the chosen stack. A release promotion PR from
+  `dev` to `main` declares a `patch`, `minor`, or `major` bump and updates the manifest and
+  changelog.
+- **Every merge to `main` is a release:** the release workflow validates the declared version
+  and automatically publishes or deploys. Release-related workflows do not run for changes to
+  `dev`.
+- Create a `v<version>` tag on the merged `main` commit only when the chosen ecosystem requires
+  one; if created, it must match the version source of truth.
 - **Record the real procedure here** when the stack is chosen (see "Procedure" below), including
-  how to yank a bad release.
+  how to verify and recover from a failed release.
 
 ## Procedure — NOT YET FILLED IN
 
 The stack has not been chosen yet (`docs/decisions.md`, D-001). At bootstrap:
 
-1. Replace this section with the exact steps for the chosen stack: version bump → checks →
-   commit + tag → push → watch CI → verify the artifact/release.
-2. Add the publish command for the distribution channel (registry, release assets, container).
-3. Add the rollback/yank path.
-4. Only commands that were actually run belong here.
+1. Replace this section with the exact steps for the chosen stack: update the version and
+  changelog, run checks, and open the `dev`-to-`main` release promotion PR.
+2. Document how the main-branch workflow publishes or deploys automatically, and how to verify
+  its result. Include a version tag only if the ecosystem requires one.
+3. Add the recovery path for a failed or bad release.
+4. Do not invent stack-specific commands before bootstrap; only commands that were actually run
+  belong here.
 
 ## Skeleton to adapt
 
 ```text
-1. Bump the version in <manifest>; add the CHANGELOG entry.
+1. Declare a patch, minor, or major bump; update <manifest> and the CHANGELOG.
 2. Run the project's check command (docs/development.md) and the build.
-3. git add -A && git commit -m "Release v<version>"
-4. git tag v<version> && git push origin main --tags
-5. Watch CI (gh run watch); verify the artifact / release page.
-6. Publish (exact command) — only when the user asks.
-7. Verify from a clean install: <the one-line install command>.
+3. Open a release promotion PR from dev to main.
+4. After merge, verify the automatic publish or deployment. Create a matching version tag on
+   that main commit only if the ecosystem requires one.
+5. Verify from a clean install or deployment check: <the stack-specific verification>.
 ```
