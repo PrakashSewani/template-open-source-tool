@@ -108,8 +108,9 @@ Wait for confirmation. Do not scaffold before the user agrees.
 ## Step 7 — Verify before declaring done
 
 - Run the check command, the build, and the tool's `--help` yourself.
-- Delegate to the `verifier` subagent with the decision entry and `docs/development.md` as
-  acceptance criteria. Its report is what "scaffolded" means — not your own summary.
+- Compare each result against the acceptance criteria in the decision entry and
+  `docs/development.md`. Record observed outcomes in `docs/status.md`; the primary agent owns
+  verification.
 - If verification fails, fix and re-verify. Do not mark the phase complete on a red check.
 
 ## Anti-patterns
