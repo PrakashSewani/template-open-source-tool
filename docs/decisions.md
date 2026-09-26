@@ -22,3 +22,14 @@ Replace this entry before scaffolding, and include:
 
 The chosen stack is then described in `docs/architecture.md`, and its commands in
 `docs/development.md`.
+
+## D-002: Single-agent workflow and requirement review
+
+**Date:** 2026-09-26
+
+**Decision:** The primary agent handles discovery, documentation, design, implementation, and
+verification sequentially without spawning subagents, to avoid unnecessary request throttling.
+Before implementing, it reviews requirements and user suggestions for ambiguity, conflicts,
+technical inaccuracies, and material risks. It explains evidence and asks for confirmation when
+the issue affects scope, architecture, or a public contract; minor, low-risk assumptions may be
+stated and handled directly.

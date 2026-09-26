@@ -1,7 +1,7 @@
 # Open Source Tool
 
-A repository template for an open-source **CLI, library, or small service** — docs, agent rules,
-subagents, and a release-shaped skeleton. No tech stack is baked in: the stack is chosen when the
+A repository template for an open-source **CLI, library, or small service** — docs, a single-agent
+workflow, and a release-shaped skeleton. No tech stack is baked in: the stack is chosen when the
 tool's requirements are known.
 
 ## Getting started
@@ -30,19 +30,19 @@ tool's requirements are known.
 
 ## What's in here
 
-- `AGENTS.md` — the four rules, the PM/subagent model, and the no-stack-assumed workflow.
+- `AGENTS.md` — the four rules, the senior-architect workflow, and the no-stack-assumed process.
 - `docs/` — `product.md` (the brief), `architecture.md`, `decisions.md`, `status.md`,
   `development.md`.
-- `.commandcode/agents/` — `implementer`, `verifier`, `docs-writer`.
+- `.commandcode/agents/` — optional role profiles; the default workflow does not spawn subagents.
 - `.commandcode/skills/` — `project-bootstrap` (choose + scaffold the stack), `ship-release`.
 - `scripts/init.mjs` — renames the template once; delete it after.
 
 ## Why nothing is pinned
 
 Templates that ship a pinned stack go stale in weeks and force yesterday's tools onto today's
-project. This template ships the **shape** — docs-first, PM + subagents, one check command, a
-tag-driven release — and leaves the stack to be decided with you at project start, with versions
-resolved on that day.
+project. This template ships the **shape** — docs-first, requirements review, single-agent
+workflow, one check command, and a tag-driven release — and leaves the stack to be decided
+with you at project start, with versions resolved on that day.
 
 ## License
 
