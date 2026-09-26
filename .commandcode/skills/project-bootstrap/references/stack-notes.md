@@ -41,10 +41,12 @@ good the code is.
 
 ## Release hygiene
 
-- The version lives in one manifest; the tag is `v<version>` and matches it exactly.
-- CI builds the artifact on tags; publishing is a deliberate step with credentials the CI has
-  scoped for exactly that.
-- Checksums/signatures if users download binaries. Provenance if the registry supports it.
+- The version lives in one manifest; the release promotion PR from `dev` to `main` declares the
+  bump and updates the changelog.
+- Merging the promotion PR to `main` triggers the automated release workflow. Create a matching
+  `v<version>` tag on that commit only when the selected ecosystem requires one.
+- Scope publishing credentials narrowly. Add checksums/signatures if users download binaries,
+  and provenance if the registry supports it.
 
 ## Always
 

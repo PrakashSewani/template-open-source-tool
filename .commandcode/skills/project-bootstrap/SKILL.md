@@ -87,12 +87,21 @@ Wait for confirmation. Do not scaffold before the user agrees.
 - Create the structure from the proposal (source, tests, packaging).
 - Install dependencies; get the tool running end to end for its simplest command (`--help` is a
   real milestone).
+- Create and push the `dev` branch, then set it as the GitHub default branch. If repository
+  permissions prevent changing the default, tell the user to set it in the repository's GitHub
+  settings. Configure branch protection for `dev` and `main` where available.
+- Feature work targets `dev` through pull requests. Promote releases with a pull request from
+  `dev` to `main` that declares a `patch`, `minor`, or `major` bump and updates the version source
+  of truth and changelog.
 - Wire the checks: typecheck (if applicable), lint, tests, build — one command each, plus a
   single `check` command that runs them all.
 - Add `.github/workflows/ci.yml` running the check command and the build, using current action
   versions (resolve them — same rule as packages).
-- Add the release path: tag `v<version>` → CI builds the artifact → publishes/attaches it. The
-  publish step stays a deliberate human action (see the `ship-release` skill).
+- Add the release workflow so every merge to `main` validates the declared version and
+  automatically publishes or deploys. Release-related workflows must not run for changes to
+  `dev`. Create a version tag on the merged `main` commit only if the chosen ecosystem requires
+  one. Resolve the workflow and publishing/deployment details for the chosen stack; do not assume
+  them before bootstrap.
 - If it is a library: make the public API explicit and exported; nothing else is public.
 - Do not copy an example project wholesale. Write what this tool needs.
 

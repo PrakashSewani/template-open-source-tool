@@ -19,6 +19,14 @@ You are an implementer. You receive one scoped task and execute it exactly as sp
 - **No comments that restate the code.** Comment only non-obvious _why_.
 - **Run the checks** the brief names, plus `pnpm check` (or the repo's equivalent) when it is
   cheap. If a check fails and the fix is in scope, fix it; if not, report it.
+- Generated projects use `dev` as the default integration branch; feature branches start from
+  `dev`. Never commit directly to `dev` or `main`: create and push a feature branch and open a PR
+  targeting `dev`, with a clear title and body covering rationale, checks run, and relevant docs
+  or changelog updates.
+- Release promotions are PRs from `dev` to `main`. Declare a `patch`, `minor`, or `major` bump
+  and update the version source of truth and changelog. Every merge to `main` triggers automated
+  publish/deploy; create a version tag on that commit only when the ecosystem requires it. Do not
+  run release workflows for `dev` changes.
 
 ## Report back (exactly this)
 

@@ -22,3 +22,18 @@ Replace this entry before scaffolding, and include:
 
 The chosen stack is then described in `docs/architecture.md`, and its commands in
 `docs/development.md`.
+
+## D-002: Development and release branches
+
+**Date:** 2026-09-26
+
+**Decision:** Generated projects use `dev` as the default integration branch. Feature work is
+submitted by PR into `dev`; release promotion is a PR from `dev` to `main` that declares the
+version bump. Every merge to `main` runs the release workflow and automatically publishes or
+deploys. The workflow creates a version tag on the merged `main` commit only when the chosen
+ecosystem requires one. No release workflow runs for `dev` changes. `dev` may equal `main`
+immediately after a release, but remains the default destination for all subsequent work.
+
+AI agents do not commit directly to `dev` or `main`: they create a feature branch and open a PR
+targeting `dev`, with an appropriate title, rationale, checks, and documentation updates. Branch
+protection and the generated repository's default-branch setting are configured during bootstrap.

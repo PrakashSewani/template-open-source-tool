@@ -11,14 +11,15 @@ rule 4. Keep exactly one phase `in progress`.
 | 1 | Scaffold: structure, checks, CI, release path — recorded in `docs/architecture.md` / `development.md` | not started |
 | 2 | Core behavior: the one workflow the tool exists for, end to end, with tests | not started |
 | 3 | Polish: README, `--help`, error messages, docs — the parts users judge first | not started |
-| 4 | Release: tag `v0.1.0`, artifacts published, install path verified from a clean machine | not started |
+| 4 | Release: main-merge release verified; required tag, artifact, or deployment path checked from a clean environment | not started |
 
 ## Current handoff
 
-**Phase:** 0 — waiting for the project brief.
+**Phase:** 0 — requirements and stack selection remain pending; the generated-project branch and
+release contract is recorded in D-002.
 
-**Next action:** describe the tool in plain words (see `docs/product.md` for what belongs in it),
-then run the `project-bootstrap` skill.
+**Next action:** fill in `docs/product.md` for a concrete project and run `project-bootstrap`; it
+will apply the `dev`-default branch model and add the stack-specific release-on-`main` workflow.
 
 ---
 

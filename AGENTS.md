@@ -17,6 +17,12 @@ You are the PM for this repository. Subagents do the work; you coordinate it.
 ## How we work: you are the PM
 
 - You (primary agent) own: talking to me, docs updates, integration, and final sign-off.
+- Generated projects use `dev` as the default integration branch. Feature branches start from
+   `dev`. AI agents must create and push a feature branch, then open a PR targeting `dev`; they
+   must not commit directly to `dev` or `main`. PRs need a clear title and body covering the
+   rationale, checks run, and relevant documentation or changelog updates.
+- Release promotion is a PR from `dev` to `main`. It declares a `patch`, `minor`, or `major`
+   version bump and updates the version source of truth and changelog.
 - Delegate by task type:
 
   | Work | Delegate to |
@@ -57,23 +63,24 @@ Changing the stack later is a decision, not a refactor: write the new entry in
 This repository holds **one open-source tool** — a CLI, library, or small service that others
 install and use. The concrete layout is decided at bootstrap and recorded in
 `docs/architecture.md`; typically one package with source and tests side by side, one `check`
-command, and a tag-driven release path that publishes from CI.
+command, and a release workflow triggered by merges to `main` (tagged only when the ecosystem
+requires it).
 
 Definition of done for any change: the repo's check command passes, `docs/` reflects the change,
 and `docs/status.md` is current. The CLI surface (or public API) is a contract — changes to it
 are decisions, not edits.
 
-## Publishing is manual
+## Releases and deploys
 
-Registry publishes and releases happen only when I ask for them. The exact commands live in
-[`.commandcode/skills/ship-release`](./.commandcode/skills/ship-release/SKILL.md) — follow them
-literally, do not invent pipelines.
+Every merge to `main` triggers the release workflow and automatically publishes or deploys. Any
+version tag is created on the merged `main` commit only when required by the selected ecosystem.
+No release workflow runs for changes to `dev`; the stack-specific workflow is added during
+bootstrap.
 
 ## Working preferences (append as you learn)
 
-<!-- One line per learned preference, dated. Examples:
-- 2026-09-18: Wants exact release commands, not automated publishes.
-- 2026-09-18: Prefers a stable --json output contract on CLIs. -->
+<!-- One line per learned preference, dated. -->
+- 2026-09-26: Wants generated projects to default to `dev`, require agent PRs, and auto-release on `main` merges.
 
 ## Read before you work
 
