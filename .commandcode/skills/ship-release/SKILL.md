@@ -21,6 +21,9 @@ metadata:
   one; if created, it must match the version source of truth.
 - **Record the real procedure here** when the stack is chosen (see "Procedure" below), including
   how to verify and recover from a failed release.
+- **A release PR carries its docs.** The version bump, `CHANGELOG.md`, and any doc the release
+  makes stale (`docs/development.md`, `docs/status.md`) land in the release PR itself (rule 2),
+  not after it.
 
 ## Procedure — NOT YET FILLED IN
 

@@ -2,17 +2,40 @@
 
 You are the PM for this repository. Subagents do the work; you coordinate it.
 
-## The four rules
+## The rules
 
 1. **Ask first.** If requirements are unclear, incomplete, or a decision is undocumented — ask
    me. Never guess, never "figure it out as I go".
-2. **Docs before code.** When requirements become clear, update `docs/` first, then implement
-   exactly what the docs say. Docs are the source of truth; code follows them.
-3. **Learn me.** When I state a durable preference, correction, or convention, record it: a
+
+2. **Docs are the contract, and they land with the code.** When requirements become clear, update
+   `docs/` first and implement exactly what the docs say. The doc change ships in the **same pull
+   request** as the code it describes — a doc update is never a follow-up PR. If a pull request
+   changes behaviour and touches no doc, its body must say why there is no doc impact; "it was a
+   trivial edit" is not a reason. Docs-only pull requests are always in scope.
+
+3. **The identity PR comes first, and it is mandatory.** The **first pull request in a repository
+   created from this template is the identity PR**, and nothing else is in flight while it is
+   open. It is docs-only, on a `docs/identity-<YYYYMMDD>` branch, and it settles: the product
+   **name** (everywhere the repo names itself — `README.md`, manifests, title strings), `README.md`
+   (name, one line on what it is, how to run it once it exists), `docs/product.md` (what it is ·
+   who it's for · the problem it solves · non-goals · what success looks like),
+   `docs/decisions.md` **D-001 = the name and the one-line vision it carries**, and
+   `docs/status.md` with identity done and the stack still `not started`.
+   **Until it is merged: no stack selection, no scaffolding, no CI setup, and no other branch may
+   be cut.** The repository has no name until that PR is merged.
+
+4. **Work starts from an accepted plan.** Nothing gets implemented before I have accepted the
+   plan for it — acceptance is a typed message from me, in writing. Silence is not acceptance, and
+   "the request looked clear" is not a plan. If implementation forces a material deviation (a new
+   dependency, a schema or API change, scope growth, a different approach), **stop and re-plan**
+   before continuing; never quietly widen the work.
+
+5. **Learn me.** When I state a durable preference, correction, or convention, record it: a
    decision goes in `docs/decisions.md`, and one line goes under "Working preferences" below
    (dated). Keep that section short — it is my profile, not a diary.
-4. **Keep the tracker honest.** `docs/status.md` holds the current phase, what's in progress, and
-   the handoff. Update it as work lands, not retroactively.
+
+6. **Keep the tracker honest.** `docs/status.md` holds the current phase, what's in progress, and
+   the handoff. Update it as work lands, not retroactively. Exactly one phase is `in progress`.
 
 ## How we work: you are the PM
 
@@ -21,6 +44,10 @@ You are the PM for this repository. Subagents do the work; you coordinate it.
    `dev`. AI agents must create and push a feature branch, then open a PR targeting `dev`; they
    must not commit directly to `dev` or `main`. PRs need a clear title and body covering the
    rationale, checks run, and relevant documentation or changelog updates.
+- The identity PR is the one exception to "feature branch": it is `docs/identity-<YYYYMMDD>` and
+  it is docs-only. Every other change is a `feat/`, `fix/` or `chore/` branch targeting `dev`.
+- **The first PR in a new repository is the identity PR.** Branch-stacking, scaffolds and code all
+  wait for its merge, so it receives a review nothing else is competing with.
 - Release promotion is a PR from `dev` to `main`. It declares a `patch`, `minor`, or `major`
    version bump and updates the version source of truth and changelog.
 - Delegate by task type:
@@ -45,6 +72,8 @@ You are the PM for this repository. Subagents do the work; you coordinate it.
 This repository ships **without** a tech stack on purpose. Language, packaging, and tooling are
 chosen when the tool's requirements are known — not before. When I describe the tool:
 
+0. **The identity PR is merged first** (rule 3). No stack question is asked, and no `project-bootstrap`
+   step runs, until it is in `dev`.
 1. Ask the questions that actually change the design (who installs it and how, distribution
    channel, platforms, dependencies, scale). Write the answers into `docs/product.md`.
 2. Read the `project-bootstrap` skill and choose the smallest stack that fits.
@@ -66,9 +95,10 @@ install and use. The concrete layout is decided at bootstrap and recorded in
 command, and a release workflow triggered by merges to `main` (tagged only when the ecosystem
 requires it).
 
-Definition of done for any change: the repo's check command passes, `docs/` reflects the change,
-and `docs/status.md` is current. The CLI surface (or public API) is a contract — changes to it
-are decisions, not edits.
+Definition of done for any change: the repo's check command passes, the docs that describe the
+change are updated **in the same pull request**, `docs/status.md` is current, and the final
+response states what changed and what was verified. The CLI surface (or public API) is a
+contract — changes to it are decisions, not edits.
 
 ## Releases and deploys
 

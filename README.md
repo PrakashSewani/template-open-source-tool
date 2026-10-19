@@ -6,7 +6,12 @@ tool's requirements are known.
 
 ## Getting started
 
-1. **Create the repo** — "Use this template → Create a new repository" on GitHub, or locally:
+1. **Name it and say what it is — the first PR.** Before any stack is chosen, open the identity PR
+   (a `docs/identity-<date>` branch): the product name, `README.md`, and `docs/product.md` with the
+   vision — what it is, who it's for, the problem, non-goals, and what success looks like. It is
+   the repository's first merged pull request and nothing else is started until it lands.
+
+2. **Create the repo** — "Use this template → Create a new repository" on GitHub, or locally:
 
    ```powershell
    .\scripts\new-project.ps1 -Template template-open-source-tool -Name my-tool -Title "My Tool"
@@ -16,13 +21,13 @@ tool's requirements are known.
    bash scripts/new-project.sh template-open-source-tool my-tool "My Tool"
    ```
 
-2. **Rename** (skip if you used the script above):
+3. **Rename** (skip if you used the script above):
 
    ```bash
    node scripts/init.mjs --name my-tool --title "My Tool"
    ```
 
-3. **Bootstrap it.** Open an AI session in the repo, describe the tool in plain words, then say
+4. **Bootstrap it.** Open an AI session in the repo, describe the tool in plain words, then say
    *"bootstrap this project"*. The agent follows `AGENTS.md` and the `project-bootstrap` skill:
    it asks the questions that matter, picks the smallest stack that fits, resolves current
    package versions **live**, records the decision in `docs/`, and scaffolds the repo with checks,
@@ -39,7 +44,8 @@ ecosystem requires one.
 
 ## What's in here
 
-- `AGENTS.md` — the four rules, the PM/subagent model, and the no-stack-assumed workflow.
+- `AGENTS.md` — the rules, including identity-first (rule 3) and docs-with-the-code (rule 2), the
+  PM/subagent model, and the no-stack-assumed workflow.
 - `docs/` — `product.md` (the brief), `architecture.md`, `decisions.md`, `status.md`,
   `development.md`.
 - `.commandcode/agents/` — `implementer`, `verifier`, `docs-writer`.
